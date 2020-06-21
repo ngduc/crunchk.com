@@ -4,6 +4,8 @@ Website to list latest updates for Startups, Funding news, Startup data, etc.
 
 https://crunchk.com
 
+<img src="docs/crunchk-demo-1.gif" width="70%" />
+
 ### Tech Stacks
 
 - Typescript
