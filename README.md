@@ -13,6 +13,8 @@ https://crunchk.com
 - React-native
 - React-native-web
 - Tailwind-RN
+- React-motion-layout
+- Es5-html-elements
 - Razzle
 
 ### Development
