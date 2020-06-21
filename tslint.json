@@ -1,0 +1,20 @@
+{
+  "extends": ["tslint:latest", "tslint-react"],
+  "rules": {
+    "quotemark": [true, "single", "jsx-double"],
+    "semicolon": false,
+    "trailing-comma": false,
+    "no-submodule-imports": false,
+    "jsx-wrap-multiline": false,
+    "jsx-no-lambda": false,
+    "jsx-no-multiline-js": false,
+    "interface-name": false,
+    "ordered-imports": false,
+    "object-literal-sort-keys": false
+  },
+  "linterOptions": {
+    "exclude": [
+      "**/node_modules/**"
+    ]
+  }
+}
