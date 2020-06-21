@@ -2,15 +2,10 @@ import React from 'react';
 import AsyncStorage from '@callstack/async-storage';
 import { View, Text } from 'react-native';
 import tailwind from 'tailwind-rn';
-import styled from 'styled-components/native';
 // import { H3 } from "es5-html-elements";
 
 import { MotionScene, SharedElement, MotionScreen } from 'react-motion-layout';
-import { NewsInterface } from './CardUtil';
-
-const StyledText = styled(Text)`
-  margin-bottom: 3px;
-`;
+import { NewsInterface, nFormatter, StyledText, Tag, InfoTag } from '../Cards/CardUtil';
 
 interface Props {
   match?: { params: { companyName: string } };
@@ -46,7 +41,7 @@ export default (props: Props) => {
         <View style={tailwind('w-full flex')}>
           <View style={tailwind('border border-gray-400 bg-white rounded p-4')}>
             <View style={tailwind('flex flex-row justify-between items-baseline')}>
-              <SharedElement.Image alt="" style={tailwind('w-32 h-12')} src={data.logoUrl} animationKey="avatar" />
+              <SharedElement.Image alt="" style={tailwind('w-40 h-10')} src={data.logoUrl} animationKey="avatar" />
               <View style={tailwind('flex flex-col text-right mb-2')}>
                 <Text style={tailwind('text-gray-900 font-bold text-xl mb-2 capitalize')}>{data.companyName}</Text>
               </View>
@@ -55,12 +50,24 @@ export default (props: Props) => {
               {/* <Text style={tailwind('')}>2019-12 $10 M, founded {data.founded}</Text> */}
               <Text style={tailwind('')}>Founded {data.founded}</Text>
               <Text style={tailwind('')}>
-                {data.lastRound} - Emp: {data.employeeCount}
+                {data.employeeCount && <InfoTag>Size: {nFormatter(data.employeeCount)}</InfoTag>}
+                {data.lastRound && <Tag>{data.lastRound}</Tag>}
+                {data.totalFunding && <Tag>{nFormatter(data.totalFunding)}</Tag>}
               </Text>
             </View>
-            <StyledText>
-              {data.leaderTitle}: {data.leaderName}
-            </StyledText>
+            {data.leaderName && (
+              <StyledText>
+                {data.leaderLinkedIn ? (
+                  <a href={data.leaderLinkedIn}>
+                    {data.leaderTitle}: {data.leaderName}
+                  </a>
+                ) : (
+                  <>
+                    {data.leaderTitle}: {data.leaderName}
+                  </>
+                )}
+              </StyledText>
+            )}
             <StyledText>&nbsp;</StyledText>
             <StyledText>{data.title}</StyledText>
           </View>

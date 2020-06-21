@@ -3,11 +3,10 @@ import AsyncStorage from '@callstack/async-storage';
 import { useHistory } from 'react-router-dom';
 import { View, Text } from 'react-native';
 import tailwind from 'tailwind-rn';
-import styled from 'styled-components/native';
 
 import CardList from '../Cards/CardList';
 // import CompanyCard from '../Cards/CompanyCard';
-import { NewsInterface } from '../Cards/CardUtil';
+import { NewsInterface, nFormatter, StyledText, Tag, InfoTag } from '../Cards/CardUtil';
 
 import { MotionScene, MotionScreen, SharedElement, useMotion } from 'react-motion-layout';
 
@@ -16,10 +15,6 @@ import fetch from 'unfetch';
 const fetcher = (url: string) => fetch(url).then((r) => r.json());
 
 const API_GET_NEWS = 'http://localhost:3007/get-news'
-
-const StyledText = styled(Text)`
-  margin-bottom: 3px;
-`;
 
 function ItemComponent({ data, id }: { data: NewsInterface; id: number }) {
   const history = useHistory();
@@ -41,6 +36,13 @@ function ItemComponent({ data, id }: { data: NewsInterface; id: number }) {
       >
         <View style={tailwind('flex flex-row justify-between items-baseline')}>
           <SharedElement.Image alt="" style={tailwind('w-32')} src={data.logoUrl} animationKey="avatar" />
+          <View style={{ ...tailwind('flex flex-row') }}>
+            {data.employeeCount && (
+              <InfoTag>Size: {nFormatter(data.employeeCount)}</InfoTag>
+            )}
+            {data.lastRound && <Tag>{data.lastRound}</Tag>}
+            {data.totalFunding && <Tag>{nFormatter(data.totalFunding)}</Tag>}
+          </View>
           {/* <View style={tailwind('flex flex-col text-right mb-2')}>
             <Text style={tailwind('text-gray-900 font-bold text-xl mb-2 capitalize')}>{data.companyName}</Text>
           </View> */}
