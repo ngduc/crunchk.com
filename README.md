@@ -2,6 +2,8 @@
 
 Website to list latest updates for Startups, Funding news, Startup data, etc.
 
+https://crunchk.com
+
 ### Tech Stacks
 
 - Typescript
